@@ -20,7 +20,16 @@
       $page++;
     }
 
+    // var_dump($people);
+
+    function date_sort($a, $b) {
+      return $b->signup_date - $a->signup_date;
+    }
+
+    usort($people, 'date_sort');
+
     var_dump($people);
+
     ?>
 
 
