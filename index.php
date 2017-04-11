@@ -6,10 +6,13 @@
   </head>
   <body>
     <?php
-      $res = file_get_contents('http://join.nutshell.com/people/1/');
-      // $res = json_decode($res);
-      echo $res;
+    $page = 1;
 
+    while($res !== '[]') {
+      $res = file_get_contents('http://join.nutshell.com/people/' . $page);
+      echo $res;
+      $page++;
+    }
     ?>
 
 
