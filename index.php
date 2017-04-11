@@ -6,13 +6,21 @@
   </head>
   <body>
     <?php
-    $page = 1;
+
+    $people = json_decode(file_get_contents('http://join.nutshell.com/people/1'));
+
+    $page = 2;
 
     while($res !== '[]') {
       $res = file_get_contents('http://join.nutshell.com/people/' . $page);
-      echo $res;
+      $json = json_decode($res);
+
+      $people = array_merge($people, $json);
+
       $page++;
     }
+
+    var_dump($people);
     ?>
 
 
