@@ -11,7 +11,7 @@
     <?php
     $people = array();
 
-    $page = 2;
+    $page = 1;
     while($res !== '[]') {
       $res = file_get_contents('http://join.nutshell.com/people/' . $page);
       $json = json_decode($res);
