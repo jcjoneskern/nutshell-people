@@ -5,6 +5,9 @@
     <title>test</title>
   </head>
   <body>
+
+    <ol>
+
     <?php
 
     $people = json_decode(file_get_contents('http://join.nutshell.com/people/1'));
@@ -20,28 +23,26 @@
     }
 
     function date_sort($a, $b) {
-      return $b->signup_date - $a->signup_date;
+      return strtotime($b->signup_date) - strtotime($a->signup_date);
     }
 
     usort($people, 'date_sort');
 
     $i = 0;
     foreach ($people as $person) {
-      // print_r($person);
       if($person->email != false) {
-        print_r($person);
+
+        echo '<li><ul><li>' . $person->name . '</li><li>' . $person->email . '</li><li>' . $person->signup_date . '</li></ul></li>';
+
         $i++;
       }
       if($i >= 5) {
         break;
       }
     }
-
     ?>
 
+    </ol>
 
-
-
-    <!-- <script type="text/javascript" src="script.js"></script> -->
   </body>
 </html>
