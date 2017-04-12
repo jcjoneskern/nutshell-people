@@ -2,22 +2,21 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>test</title>
+    <title>Last Five Signups</title>
   </head>
   <body>
 
     <ol>
 
     <?php
-
-    $people = json_decode(file_get_contents('http://join.nutshell.com/people/1'));
+    $people = array();
 
     $page = 2;
     while($res !== '[]') {
       $res = file_get_contents('http://join.nutshell.com/people/' . $page);
       $json = json_decode($res);
 
-      $people = array_merge($people, $json);
+      $people = array_merge((array)$people, (array)$json);
 
       $page++;
     }
@@ -31,9 +30,7 @@
     $i = 0;
     foreach ($people as $person) {
       if($person->email != false) {
-
-        echo '<li><ul><li>' . $person->name . '</li><li>' . $person->email . '</li><li>' . $person->signup_date . '</li></ul></li>';
-
+        echo '<li><ul style="list-style: none;"><li>' . $person->name . '</li><li>' . $person->email . '</li><li>' . $person->signup_date . '</li></ul></li>';
         $i++;
       }
       if($i >= 5) {
